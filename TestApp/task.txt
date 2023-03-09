@@ -1,4 +1,6 @@
-﻿+ create random name gen!
-+ work on create user
+﻿+ create random name gen! - NO
++ we have data now and manging errors - YES
++ work on create user -Yes
++ time to login and validation with our data
 
 https://github.com/duncanrhamill/RandomNameGen/blob/master/RandomNameGen/names.json
