@@ -13,7 +13,7 @@ namespace TestApp.Models.UserModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }
-        public int NationalNumber { get; set; }
+        public long NationalNumber { get; set; }
         public long CardNumber { get; set; }
         public decimal Money { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;

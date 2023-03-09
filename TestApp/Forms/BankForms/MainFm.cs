@@ -1,4 +1,5 @@
 ﻿using CodeLandBank.Core.Repositories;
+using CodeLandBank.Extra.Creators;
 using CodeLandBank.Forms.BankForms;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace TestApp.Forms.BankForms
     {
         public MainFm()
         {
+            CreateRandomName.GetName();
             InitializeComponent();
         }
 

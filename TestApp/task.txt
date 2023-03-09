@@ -1,2 +1,4 @@
 ﻿+ create random name gen!
 + work on create user
+
+https://github.com/duncanrhamill/RandomNameGen/blob/master/RandomNameGen/names.json

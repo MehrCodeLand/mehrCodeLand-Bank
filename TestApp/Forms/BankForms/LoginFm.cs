@@ -18,7 +18,9 @@ namespace CodeLandBank.Forms.BankForms
         private readonly IBankServices _bank;
         public LoginFm( IBankServices bank)
         {
+            int result; 
             _bank = bank;
+            result = _bank.CreateUsersData();
             InitializeComponent();
         }
 
