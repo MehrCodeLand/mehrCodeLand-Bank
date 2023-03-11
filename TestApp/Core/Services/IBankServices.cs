@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeLandBank.ViewModels.UserViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,9 @@ namespace CodeLandBank.Core.Services
 {
     public interface IBankServices
     {
-        int CreateUsersData();  
+        int CreateUsersData();
+        int ValidationLogininputs(LoginUserVm loginVm);
+        int LoginUser(LoginUserVm loginUser);
 
     }
 }

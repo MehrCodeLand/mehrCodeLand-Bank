@@ -1,6 +1,7 @@
 ﻿using CodeLandBank.Core.Services;
 using CodeLandBank.Extra.Creators;
 using CodeLandBank.Extra.Security;
+using CodeLandBank.ViewModels.UserViewModels;
 using Newtonsoft.Json;
 using RandomNameGeneratorLibrary;
 using System;
@@ -204,6 +205,69 @@ namespace CodeLandBank.Core.Repositories
             return 369;
         }
 
+        private string ReadAllUsers()
+        {
+            var allUsersBankStr = File.ReadAllText(_path);
+            return  allUsersBankStr ;
+        }
+        private IList<User> ConvertToUsers()
+        {
+            var allUsersBankStr = ReadAllUsers();
+            IList<User> users = new List<User>();
+            users = JsonConvert.DeserializeObject<IList<User>>(allUsersBankStr);
+            return users;
+        }
+
         #endregion
+
+
+        #region Login User
+
+        public int ValidationLogininputs(LoginUserVm loginVm)
+        {
+            bool isNumber = loginVm.Username.All(char.IsDigit);
+            if (isNumber)
+            {
+                return 423;
+            }
+            else
+            {
+                return 323;
+            }
+        }
+
+
+        // 2323 -> login Done
+        // 4433 -> login faild
+        // 1923 -> Somthings Wrong
+        public int LoginUser(LoginUserVm loginUser)
+        {
+            IList<User> users = new List<User>();
+            users = ConvertToUsers();
+
+            // time to cheack password and username
+            foreach(var user in users)
+            {
+                if ((user.Password == loginUser.Password) && ((loginUser.Username == user.Usrename) || (loginUser.NationalCodeNumber == user.NationalNumber)))
+                {
+                    // user login Now!
+                    return 2323;
+                }
+                else
+                {
+                    return 4433;
+                }
+            }
+
+            return 1923;
+        }
+
+
+        #endregion
+        // 323 -> Username is Username
+        // 423 -> Username is National Code
+
+
     }
+
 }

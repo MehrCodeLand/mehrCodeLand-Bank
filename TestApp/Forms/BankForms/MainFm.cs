@@ -1,4 +1,5 @@
-﻿using CodeLandBank.Core.Repositories;
+﻿using CodeLandBank.Core.Engins;
+using CodeLandBank.Core.Repositories;
 using CodeLandBank.Extra.Creators;
 using CodeLandBank.Forms.BankForms;
 using System;
@@ -15,16 +16,23 @@ namespace TestApp.Forms.BankForms
 {
     public partial class MainFm : Form
     {
+        private Engin engin = new Engin();
         public MainFm()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             CreateRandomName.GetName();
             InitializeComponent();
         }
 
-        public void CreateData()
-        {
 
+        private void LoginBtn_Click(object sender, EventArgs e)
+        {
+            LoginFm loginFm = new LoginFm( new BankRepository() , engin);
+            loginFm.Show();
+            Thread.Sleep(300);
+            this.Hide();
         }
+
         private void MehrCodeLandBtn_Click(object sender, EventArgs e)
         {
             var url = "https://github.com/MehrCodeLand";
@@ -49,18 +57,10 @@ namespace TestApp.Forms.BankForms
                 "2023-1401\n";
             MessageBox.Show(message);
         }
-
-        private void LoginBtn_Click(object sender, EventArgs e)
-        {
-            LoginFm loginFm = new LoginFm( new BankRepository() );
-            loginFm.Show();
-            Thread.Sleep(300);
-            this.Hide();
-        }
-
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
     }
 }
