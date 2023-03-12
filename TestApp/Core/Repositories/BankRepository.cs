@@ -49,7 +49,7 @@ namespace CodeLandBank.Core.Repositories
             IList<User> users = new List<User>();
             var personGenerator = new PersonNameGenerator();
 
-            #region Create_User
+            #region Create User
 
             var fName = personGenerator.GenerateRandomFirstName();
             User user1 = new User()
@@ -223,6 +223,8 @@ namespace CodeLandBank.Core.Repositories
 
         #region Login User
 
+        // 423-> number
+        // 323-> username
         public int ValidationLogininputs(LoginUserVm loginVm)
         {
             bool isNumber = loginVm.Username.All(char.IsDigit);
@@ -246,20 +248,21 @@ namespace CodeLandBank.Core.Repositories
             users = ConvertToUsers();
 
             // time to cheack password and username
-            foreach(var user in users)
+
+
+            User isLogin = users.SingleOrDefault(u => u.Usrename == loginUser.Username || u.NationalNumber == loginUser.NationalCodeNumber);
+            if(isLogin != null)
             {
-                if ((user.Password == loginUser.Password) && ((loginUser.Username == user.Usrename) || (loginUser.NationalCodeNumber == user.NationalNumber)))
+                if(isLogin.Password == loginUser.Password)
                 {
-                    // user login Now!
                     return 2323;
                 }
-                else
-                {
-                    return 4433;
-                }
             }
-
-            return 1923;
+            else
+            {
+                return 4433;
+            }
+            return 4433;
         }
 
 

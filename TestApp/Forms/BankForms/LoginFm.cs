@@ -48,7 +48,7 @@ namespace CodeLandBank.Forms.BankForms
             };
 
             // Validation Password & Username
-            if (login.Password.Length < 5)
+            if (login.Password.Length < 4)
             {
                 string message = "Your password wich you\n" +
                     " Enter, was short!\n";
@@ -72,57 +72,113 @@ namespace CodeLandBank.Forms.BankForms
                 Thread.Sleep(250);
                 this.Close();
             }
-
-            // validfation data
-            // 2323 -> login Done
-            // 4433 -> login faild
-            // 1923 -> Somthings Wrong
-            result = _bank.ValidationLogininputs(login);
-            if(result  != 323)
-            {
-                // we have national number code 
-                login.NationalCodeNumber = Convert.ToInt32(login.Username);
-                login.Password = HashPasswordC.EncodePasswordMd5(login.Password);
-                login.Username = null;
-
-                int loginResult = _bank.LoginUser(login);
-                if(loginResult == 1932)
-                {
-                    // somthings wrong
-                }else if(loginResult == 4433)
-                {
-                    // login faild
-                }else if ( loginResult == 2323)
-                {
-                    // login done
-                    _engin.UserIsLogin = true;
-                    _engin.NationalCodeNumber = login.NationalCodeNumber;
-                }
-            }
             else
             {
-                // 101 -> Null 
-                // we have username <str>
-                login.Password = HashPasswordC.EncodePasswordMd5(login.Password);
-                login.NationalCodeNumber = 101;
 
-                int loginResult = _bank.LoginUser(login);
-                if (loginResult == 1932)
-                {
-                    // somthings wrong
-                }
-                else if (loginResult == 4433)
-                {
-                    // login faild
-                }
-                else if (loginResult == 2323)
-                {
-                    // login done
-                    _engin.UserIsLogin = true;
-                    _engin.Username = login.Username;
-                }
+                // validfation data
+                // 2323 -> login Done
+                // 4433 -> login faild
+                // 1923 -> Somthings Wrong
+                // 423-> NationalNumber code
+                // 323-> username
 
+
+
+                result = _bank.ValidationLogininputs(login);
+
+                // National Code or Username
+                if (result != 323)
+                {
+                    // we have national number code 
+                    login.NationalCodeNumber = Convert.ToInt32(login.Username);
+                    login.Password = HashPasswordC.EncodePasswordMd5(login.Password);
+                    login.Username = null;
+
+                    int loginResult = _bank.LoginUser(login);
+                    if (loginResult == 1932)
+                    {
+                        var message = "Somthings Wrong, please try again!";
+                        MessageBox.Show(message);
+
+                        // somthings wrong
+                        LoginFm loginFm = new LoginFm(_bank, _engin);
+                        loginFm.Show();
+                        Thread.Sleep(400);
+                        this.Close();
+
+                    }
+                    else if (loginResult == 4433)
+                    {
+                        // login faild
+                        var message = "Losing Faild,Please try again.\n";
+                        MessageBox.Show(message);
+                        LoginFm loginFm = new LoginFm(_bank, _engin);
+                        loginFm.Show();
+                        Thread.Sleep(300);
+                        this.Close();
+                    }
+                    else if (loginResult == 2323)
+                    {
+                        // login done
+                        _engin.UserIsLogin = true;
+                        _engin.NationalCodeNumber = login.NationalCodeNumber;
+                        _engin.Username = login.Username;
+
+                        var message = "   Done!   \n";
+                        MessageBox.Show(message);
+                        UserPannelFm userPannel = new UserPannelFm();
+                        userPannel.Show();
+                        Thread.Sleep(300);
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    // 101 -> Null 
+                    // we have username <str>
+                    login.Password = HashPasswordC.EncodePasswordMd5(login.Password);
+                    login.NationalCodeNumber = 101;
+
+                    int loginResult = _bank.LoginUser(login);
+                    if (loginResult == 1932)
+                    {
+                        var message = "Somthings Wrong, please try again!";
+                        MessageBox.Show(message);
+
+                        // somthings wrong
+                        LoginFm loginFm = new LoginFm(_bank, _engin);
+                        loginFm.Show();
+                        Thread.Sleep(400);
+                        this.Close();
+                    }
+                    else if (loginResult == 4433)
+                    {
+                        // login faild
+                        var message = "Losing Faild,Please try again.\n";
+                        MessageBox.Show(message);
+                        LoginFm loginFm = new LoginFm(_bank, _engin);
+                        loginFm.Show();
+                        Thread.Sleep(300);
+                        this.Close();
+                    }
+                    else if (loginResult == 2323)
+                    {
+                        // login done
+                        _engin.UserIsLogin = true;
+                        _engin.NationalCodeNumber = login.NationalCodeNumber;
+                        _engin.Username = login.Username;
+
+                        var message = "   Done!   \n";
+                        MessageBox.Show(message);
+                        UserPannelFm userPannel = new UserPannelFm();
+                        userPannel.Show();
+                        Thread.Sleep(300);
+                        this.Close();
+                    }
+
+                }
             }
+
             
         }
     }
