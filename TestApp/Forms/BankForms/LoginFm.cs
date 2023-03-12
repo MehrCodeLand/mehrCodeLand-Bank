@@ -126,7 +126,7 @@ namespace CodeLandBank.Forms.BankForms
 
                         var message = "   Done!   \n";
                         MessageBox.Show(message);
-                        UserPannelFm userPannel = new UserPannelFm();
+                        UserPannelFm userPannel = new UserPannelFm( _bank , _engin);
                         userPannel.Show();
                         Thread.Sleep(300);
                         this.Close();
@@ -170,7 +170,7 @@ namespace CodeLandBank.Forms.BankForms
 
                         var message = "   Done!   \n";
                         MessageBox.Show(message);
-                        UserPannelFm userPannel = new UserPannelFm();
+                        UserPannelFm userPannel = new UserPannelFm( _bank , _engin);
                         userPannel.Show();
                         Thread.Sleep(300);
                         this.Close();
