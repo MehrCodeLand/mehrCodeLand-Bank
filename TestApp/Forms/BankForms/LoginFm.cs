@@ -1,6 +1,7 @@
 ﻿using CodeLandBank.Core.Engins;
 using CodeLandBank.Core.Services;
 using CodeLandBank.Extra.Security;
+using CodeLandBank.Forms.ErrorsForms;
 using CodeLandBank.ViewModels.UserViewModels;
 using System;
 using System.Collections.Generic;
@@ -119,10 +120,18 @@ namespace CodeLandBank.Forms.BankForms
                     }
                     else if (loginResult == 2323)
                     {
+                        var cardNumber = _bank.FindCardNumber(login);
+                        if (cardNumber == -123)
+                        {
+                            WeHaveSomeProblemFm problemFm = new WeHaveSomeProblemFm();
+                            problemFm.Show();
+                            this.Close();
+                        }
                         // login done
                         _engin.UserIsLogin = true;
                         _engin.NationalCodeNumber = login.NationalCodeNumber;
                         _engin.Username = login.Username;
+                        _engin.CardNumber = cardNumber;
 
                         var message = "   Done!   \n";
                         MessageBox.Show(message);
@@ -163,10 +172,18 @@ namespace CodeLandBank.Forms.BankForms
                     }
                     else if (loginResult == 2323)
                     {
+                        var cardNumber = _bank.FindCardNumber(login);
+                        if(cardNumber == -123)
+                        {
+                            WeHaveSomeProblemFm problemFm = new WeHaveSomeProblemFm();
+                            problemFm.Show();
+                            this.Close();
+                        }
                         // login done
                         _engin.UserIsLogin = true;
                         _engin.NationalCodeNumber = login.NationalCodeNumber;
                         _engin.Username = login.Username;
+                        _engin.CardNumber = cardNumber;
 
                         var message = "   Done!   \n";
                         MessageBox.Show(message);
@@ -175,11 +192,8 @@ namespace CodeLandBank.Forms.BankForms
                         Thread.Sleep(300);
                         this.Close();
                     }
-
                 }
             }
-
-            
         }
     }
 }

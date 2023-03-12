@@ -23,12 +23,31 @@ namespace CodeLandBank.Forms.BankForms
             _engin = engin;
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
+            FillAutoData();
         }
 
+        private void FillAutoData()
+        {
+            usernameData.Text = _engin.Username;
+            cardNumberbox.Text = _engin.CardNumber.ToString();
+        }
         private void Back_btn_Click(object sender, EventArgs e)
         {
-            MainFm mainFm = new MainFm();
+            Application.Restart();
+        }
 
+        private void seeYourProfileBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var message = "Bye...";
+            MessageBox.Show(message);
+            Thread.Sleep(500);
+
+            Application.Exit();
         }
     }
 }

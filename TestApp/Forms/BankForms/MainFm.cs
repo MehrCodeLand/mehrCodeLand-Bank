@@ -32,7 +32,6 @@ namespace TestApp.Forms.BankForms
             Thread.Sleep(300);
             this.Hide();
         }
-
         private void MehrCodeLandBtn_Click(object sender, EventArgs e)
         {
             var url = "https://github.com/MehrCodeLand";

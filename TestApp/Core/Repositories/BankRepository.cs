@@ -22,15 +22,17 @@ namespace CodeLandBank.Core.Repositories
     public class BankRepository : IBankServices
     {
         private readonly string _path = @"C:\BankJsonUsers\UsersJsonFile.json";
+
+        #region Create Data And JSON File
         public int CreateUsersData()
         {
-            int result; 
+            int result;
             IList<User> users = new List<User>();
             users = CreateUsers();
 
             result = CreateFolderFile();
             // if file was created , we will not create that again
-            if(result == 1001)
+            if (result == 1001)
             {
                 return 1001;
             }
@@ -41,8 +43,6 @@ namespace CodeLandBank.Core.Repositories
 
             return result;
         }
-
-        #region Create Data And JSON File
 
         private IList<User> CreateUsers()
         {
@@ -204,7 +204,6 @@ namespace CodeLandBank.Core.Repositories
             
             return 369;
         }
-
         private string ReadAllUsers()
         {
             var allUsersBankStr = File.ReadAllText(_path);
@@ -266,10 +265,30 @@ namespace CodeLandBank.Core.Repositories
         }
 
 
+
+
         #endregion
         // 323 -> Username is Username
         // 423 -> Username is National Code
 
+
+        #region Finding Staff
+
+        // -123 -> Not Found
+        public long FindCardNumber(LoginUserVm loginUser)
+        {
+            IList<User> users = ConvertToUsers();
+
+            User user = users.SingleOrDefault(u => u.NationalNumber == loginUser.NationalCodeNumber || u.Usrename == loginUser.Username);
+            if(user != null)
+            {
+                return user.CardNumber; 
+            }
+
+            return -123;
+
+        }
+        #endregion
 
     }
 
