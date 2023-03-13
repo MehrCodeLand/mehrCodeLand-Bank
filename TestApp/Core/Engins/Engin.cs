@@ -13,6 +13,8 @@ namespace CodeLandBank.Core.Engins
         public long  NationalCodeNumber { get; set; }
         public bool UserIsLogin { get; set; } = false;
         public long CardNumber { get; set; }
+        public bool IsBan { get; set; }
+
         
     }
 }

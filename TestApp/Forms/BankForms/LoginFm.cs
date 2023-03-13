@@ -31,13 +31,14 @@ namespace CodeLandBank.Forms.BankForms
             InitializeComponent();
         }
 
+
+
         private void BackBtn_Click(object sender, EventArgs e)
         {
             MainFm main = new MainFm();
             this.Close();
             main.Show();
         }
-
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             int result; 

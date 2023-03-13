@@ -268,9 +268,6 @@ namespace CodeLandBank.Core.Repositories
 
 
         #endregion
-        // 323 -> Username is Username
-        // 423 -> Username is National Code
-
 
         #region Finding Staff
 
@@ -287,6 +284,14 @@ namespace CodeLandBank.Core.Repositories
 
             return -123;
 
+        }
+        public User FindUserByCardNumber(long cardNumber)
+        {
+            IList<User> users = ConvertToUsers();
+
+            User user = users.SingleOrDefault(U => U.CardNumber == cardNumber);
+            return user;
+            
         }
         #endregion
 

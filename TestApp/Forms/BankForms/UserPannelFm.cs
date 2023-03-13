@@ -1,5 +1,6 @@
 ﻿using CodeLandBank.Core.Engins;
 using CodeLandBank.Core.Services;
+using CodeLandBank.Forms.UserPannel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,10 @@ namespace CodeLandBank.Forms.BankForms
 
         private void seeYourProfileBtn_Click(object sender, EventArgs e)
         {
-
+            UserProfileFm userProfile = new UserProfileFm( _bank , _engin );
+            userProfile.Show();
+            Thread.Sleep(300);
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)

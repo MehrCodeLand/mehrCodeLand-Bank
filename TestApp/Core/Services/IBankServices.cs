@@ -14,6 +14,6 @@ namespace CodeLandBank.Core.Services
         int ValidationLogininputs(LoginUserVm loginVm);
         int LoginUser(LoginUserVm loginUser);
         long FindCardNumber(LoginUserVm loginUser);
-
+        User FindUserByCardNumber(long cardNumber);
     }
 }
