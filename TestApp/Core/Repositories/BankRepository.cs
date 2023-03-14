@@ -1,6 +1,7 @@
 ﻿using CodeLandBank.Core.Services;
 using CodeLandBank.Extra.Creators;
 using CodeLandBank.Extra.Security;
+using CodeLandBank.Models.UserModels;
 using CodeLandBank.ViewModels.UserViewModels;
 using Newtonsoft.Json;
 using RandomNameGeneratorLibrary;
@@ -292,6 +293,67 @@ namespace CodeLandBank.Core.Repositories
             User user = users.SingleOrDefault(U => U.CardNumber == cardNumber);
             return user;
             
+        }
+
+
+        // -111 -> username is exist
+        // 111 -> username is not exist
+        public int IsUsernameExist(string username)
+        {
+            IList<User> users = ConvertToUsers();
+
+            User user = users.SingleOrDefault(u => u.Usrename == username);
+            if(user != null) { return -111; }
+            return 111 ;
+        }
+
+        public int EditUser(UserEditVm userEdit)
+        {
+            IList<User> users = ConvertToUsers();
+
+            User myEditUser = users.SingleOrDefault( u => u.CardNumber == userEdit.CardNumber);
+            User forDelete = myEditUser;
+
+            //1-update data
+            myEditUser.Usrename = userEdit.NewUsername;
+            myEditUser.Password = userEdit.NewPassword;
+
+
+            //2-remove old data
+            users = RemoveUser(forDelete);
+
+            //3 save new data 
+            SaveNewUsers(users);
+
+
+            return 0;
+        }
+
+        private IList<User> RemoveUser(User user)
+        {
+            IList<User> users = ConvertToUsers();
+            users.Remove(user);
+            return users;
+        }
+
+        private void SaveNewUsers(IList<User> users)
+        {
+            // convert to string
+            var userStr = JsonConvert.SerializeObject(users);
+
+            // delete last file
+            if (File.Exists(_path))
+            {
+                File.Delete(_path);
+            }
+
+            // create new file
+            var myFile = File.Create(@"C:\BankJsonUsers\UsersJsonFile.json");
+            myFile.Close();
+
+            File.WriteAllText(_path, userStr);
+            
+
         }
         #endregion
 
