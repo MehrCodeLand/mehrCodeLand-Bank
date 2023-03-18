@@ -5,6 +5,14 @@
 + We need Yest our login and validation - YES
 + create error forms - YES
 + create and design engin and main page - YES
-+ cheek our save and update method and edit page []
++ cheek our save and update method and edit page [ NO ]
++ Start crete send money FM 
+{
+	UserCardNUmber [YES]
+	Secend USerCardNumber
+	Validate Data And Money
+	IsBan
+	Show Result
+}
 
 https://github.com/duncanrhamill/RandomNameGen/blob/master/RandomNameGen/names.json

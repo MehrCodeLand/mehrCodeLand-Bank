@@ -1,4 +1,5 @@
 ﻿using CodeLandBank.Models.UserModels;
+using CodeLandBank.ViewModels.Operations;
 using CodeLandBank.ViewModels.UserViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace CodeLandBank.Core.Services
         User FindUserByCardNumber(long cardNumber);
         int IsUsernameExist(string usernaem);
         int EditUser(UserEditVm userEdit);
+        int ValidationSendMoneyData(SendMoneyVm sendMoney);
     }
 }

@@ -57,7 +57,18 @@ namespace CodeLandBank.Forms.BankForms
 
         private void SendMoneyBtn_Click(object sender, EventArgs e)
         {
-
+            SendMoneyFm send = new SendMoneyFm(_bank, _engin);
+            send.Show();
+            Thread.Sleep(100);
+            this.Close();
         }
+
+        // User card number
+        // User
+        // Secend Card number
+        // validate money and account
+        // is ban or not
+
+
     }
 }

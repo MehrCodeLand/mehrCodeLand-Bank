@@ -2,6 +2,7 @@
 using CodeLandBank.Extra.Creators;
 using CodeLandBank.Extra.Security;
 using CodeLandBank.Models.UserModels;
+using CodeLandBank.ViewModels.Operations;
 using CodeLandBank.ViewModels.UserViewModels;
 using Newtonsoft.Json;
 using RandomNameGeneratorLibrary;
@@ -362,8 +363,39 @@ namespace CodeLandBank.Core.Repositories
         }
 
 
+
+
         #endregion
 
-    }
+        #region Send Money
+
+
+        /*
+         * -531 -> secend User Not Found
+         * -867 -> money is to high
+         * -923 -> Your Money Less than that money you want
+         * 999 -> TRUE
+         */
+
+        public int ValidationSendMoneyData(SendMoneyVm sendMoney)
+        {
+            IList<User> users = ConvertToUsers();
+            User secendUser = users.SingleOrDefault(u => u.CardNumber == sendMoney.SecendUserCardNumber);
+            User user = users.SingleOrDefault(u => u.CardNumber == sendMoney.UserCardNumber);
+
+            if(secendUser == null) { return -531;  }
+            else if(sendMoney.Money > 10000 ) { return -867;  }
+
+            var isMoneyexist = user.Money - sendMoney.Money;
+            if(isMoneyexist < 500) { return -923;  };
+
+
+            return 999 ;
+
+
+        }
+        #endregion
+
+}
 
 }
