@@ -6,7 +6,7 @@
 + create error forms - YES
 + create and design engin and main page - YES
 + cheek our save and update method and edit page [ NO ]
-+ Start crete send money FM 
++ Start crete send money FM [Yes]
 {
 	UserCardNUmber [YES]
 	Secend USerCardNumber
@@ -14,5 +14,7 @@
 	IsBan
 	Show Result
 }
+
++ create Account Page []
 
 https://github.com/duncanrhamill/RandomNameGen/blob/master/RandomNameGen/names.json

@@ -97,6 +97,7 @@
             this.YourBonkAccountBtn.TabIndex = 5;
             this.YourBonkAccountBtn.Text = "Your Bank Account";
             this.YourBonkAccountBtn.UseVisualStyleBackColor = false;
+            this.YourBonkAccountBtn.Click += new System.EventHandler(this.YourBonkAccountBtn_Click);
             // 
             // button1
             // 
