@@ -312,6 +312,7 @@ namespace CodeLandBank.Core.Repositories
 
         #endregion
 
+
         #region Edit User
 
         public int EditUser(UserEditVm userEdit)
@@ -374,11 +375,13 @@ namespace CodeLandBank.Core.Repositories
          * -531 -> secend User Not Found
          * -867 -> money is to high
          * -923 -> Your Money Less than that money you want
+         * -9999 -> Same Users
          * 999 -> TRUE
          */
 
         public int ValidationSendMoneyData(SendMoneyVm sendMoney)
         {
+            if(sendMoney.SecendUserCardNumber == sendMoney.UserCardNumber) { return -9999; }
             IList<User> users = ConvertToUsers();
             User secendUser = users.SingleOrDefault(u => u.CardNumber == sendMoney.SecendUserCardNumber);
             User user = users.SingleOrDefault(u => u.CardNumber == sendMoney.UserCardNumber);
@@ -392,10 +395,66 @@ namespace CodeLandBank.Core.Repositories
 
             return 999 ;
 
+        }
+        public int DoTradeMoney(SendMoneyVm sendMoney)
+        {
+            IList<User> users = ConvertToUsers();
+            IList<User> deleteUsers = new List<User>();
+            IList<User> saveUsers = new List<User>();
 
+
+            User firstUser = users.SingleOrDefault(u => u.CardNumber == sendMoney.UserCardNumber);
+            User secendUser = users.SingleOrDefault(u => u.CardNumber == sendMoney.SecendUserCardNumber);
+
+            // For Delete User
+            deleteUsers.Add(firstUser);
+            deleteUsers.Add(secendUser);
+
+            // Trade
+            firstUser.Money -= sendMoney.Money;
+            secendUser.Money += sendMoney.Money;
+
+            // add Users
+            saveUsers = DeleteUsers(deleteUsers);
+            saveUsers.Add(firstUser);
+            saveUsers.Add(secendUser);
+
+            // Save Data
+            SaveNewData(saveUsers);
+
+            return 2234;
         }
         #endregion
 
-}
+
+        #region Save User Section
+        private IList<User> DeleteUsers(IList<User> deleteUsers)
+        {
+            IList<User> users = ConvertToUsers();
+            foreach( User deleteUser in deleteUsers)
+            {
+                users.Remove(users.SingleOrDefault(u => u.CardNumber == deleteUser.CardNumber));
+            }
+
+            return users;
+        }
+        private void SaveNewData( IList<User> users )
+        {
+            var usersStr = JsonConvert.SerializeObject(users , Formatting.Indented);
+
+            // delete last file
+            if (File.Exists(_path))
+            {
+                File.Delete(_path);
+            }
+
+            // create new file
+            var myFile = File.Create(@"C:\BankJsonUsers\UsersJsonFile.json");
+            myFile.Close();
+
+            File.WriteAllText(_path, usersStr);
+        }
+        #endregion
+    }
 
 }

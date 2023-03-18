@@ -62,8 +62,15 @@ namespace CodeLandBank.Forms.UserPannel
 
             result = _bank.ValidationSendMoneyData( sendMoney );
             ShowResult(result);
-             
+
             // TODO: Time To do trade
+
+            if(result == 999)
+            {
+                result = _bank.DoTradeMoney(sendMoney);
+
+                ShowResult(result);
+            }
         }
 
 
@@ -78,6 +85,7 @@ namespace CodeLandBank.Forms.UserPannel
 
             return 4001 ;
         }
+
 
         /*
          * -2001 -> CardNumber is Str
@@ -94,7 +102,7 @@ namespace CodeLandBank.Forms.UserPannel
         private void ShowResult( int result)
         {
             var message = "";
-            if(result == -3001)
+            if (result == -3001)
             {
                 message = "Cheack Money Box Again!";
                 MessageBox.Show(message);
@@ -104,7 +112,7 @@ namespace CodeLandBank.Forms.UserPannel
                 Thread.Sleep(100);
                 this.Close();
 
-            }else if(result == -2001)
+            } else if (result == -2001)
             {
                 message = "Cheack Secend Card Again Box Again!";
                 MessageBox.Show(message);
@@ -113,7 +121,7 @@ namespace CodeLandBank.Forms.UserPannel
                 sendMoneyFm.Show();
                 Thread.Sleep(100);
                 this.Close();
-            }else if( result == -531)
+            } else if (result == -531)
             {
                 message = "Secend User Not Found!";
                 MessageBox.Show(message);
@@ -123,7 +131,7 @@ namespace CodeLandBank.Forms.UserPannel
                 Thread.Sleep(100);
                 this.Close();
             }
-            else if(result == -867)
+            else if (result == -867)
             {
                 message = "Money Is To Hight";
                 MessageBox.Show(message);
@@ -133,13 +141,33 @@ namespace CodeLandBank.Forms.UserPannel
                 Thread.Sleep(100);
                 this.Close();
             }
-            else if(result == -923)
+            else if (result == -923)
             {
                 message = "You Have No Money For do this trade.";
                 MessageBox.Show(message);
 
                 SendMoneyFm sendMoneyFm = new SendMoneyFm(_bank, _engin);
                 sendMoneyFm.Show();
+                Thread.Sleep(100);
+                this.Close();
+            } else if (result == -9999 )
+            {
+                message = "Invalid Data.";
+                MessageBox.Show(message);
+
+                SendMoneyFm sendMoneyFm = new SendMoneyFm(_bank, _engin);
+                sendMoneyFm.Show();
+                Thread.Sleep(100);
+                this.Close();
+            }
+            else if (result == 2234)
+            {
+                message = "Done";
+                MessageBox.Show(message);
+
+                UserPannelFm userPannel = new UserPannelFm(_bank, _engin);
+                userPannel.Show();
+
                 Thread.Sleep(100);
                 this.Close();
             }

@@ -20,5 +20,6 @@ namespace CodeLandBank.Core.Services
         int IsUsernameExist(string usernaem);
         int EditUser(UserEditVm userEdit);
         int ValidationSendMoneyData(SendMoneyVm sendMoney);
+        int DoTradeMoney(SendMoneyVm sendMoney );
     }
 }
