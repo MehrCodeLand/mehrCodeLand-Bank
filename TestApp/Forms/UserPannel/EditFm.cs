@@ -1,6 +1,7 @@
 ﻿using CodeLandBank.Core.Engins;
 using CodeLandBank.Core.Services;
 using CodeLandBank.Extra.Security;
+using CodeLandBank.Forms.BankForms;
 using CodeLandBank.Forms.ErrorsForms;
 using CodeLandBank.Models.UserModels;
 using System;
@@ -25,14 +26,20 @@ namespace CodeLandBank.Forms.UserPannel
             _bank = bank;
             _engin = engin;
             InitializeComponent();
+            FillData();
+
         }
 
+        private void FillData()
+        {
+            usernameData.Text = _engin.Username;
+        }
         private void EditBtn_Click(object sender, EventArgs e)
         {
             var message = "";
             int result = ValidationData(usernameData.Text, PasswordBox.Text, RepasswordBox.Text);
 
-            // our respound
+            // our respound to wrong data
             if(result == 890)
             {
                 message = "username is to small!";
@@ -77,6 +84,8 @@ namespace CodeLandBank.Forms.UserPannel
                 this.Close();
             }
 
+
+            // ready to update data 
             UserEditVm userEdit = new UserEditVm()
             {
                 NewUsername = usernameData.Text,
@@ -84,6 +93,7 @@ namespace CodeLandBank.Forms.UserPannel
                 CardNumber = _engin.CardNumber,
             };
             
+
         }
 
         // 890 -> username is null or small
@@ -101,6 +111,14 @@ namespace CodeLandBank.Forms.UserPannel
             if(result == -111) { return -111; }
             else if(result == 111) { return 111; }
             return 12021; 
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            UserPannelFm pannelFm = new UserPannelFm(_bank, _engin);
+            pannelFm.Show();
+            Thread.Sleep(200);
+            this.Close();
         }
     }
 }

@@ -48,7 +48,10 @@ namespace CodeLandBank.Forms.UserPannel
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-
+            EditFm editFm = new EditFm(_bank , _engin);
+            editFm.Show();
+            Thread.Sleep(300);
+            this.Close();
         }
         private void BackBtn_Click(object sender, EventArgs e)
         {

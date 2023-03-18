@@ -307,11 +307,17 @@ namespace CodeLandBank.Core.Repositories
             return 111 ;
         }
 
+
+
+        #endregion
+
+        #region Edit User
+
         public int EditUser(UserEditVm userEdit)
         {
             IList<User> users = ConvertToUsers();
 
-            User myEditUser = users.SingleOrDefault( u => u.CardNumber == userEdit.CardNumber);
+            User myEditUser = users.SingleOrDefault(u => u.CardNumber == userEdit.CardNumber);
             User forDelete = myEditUser;
 
             //1-update data
@@ -335,7 +341,6 @@ namespace CodeLandBank.Core.Repositories
             users.Remove(user);
             return users;
         }
-
         private void SaveNewUsers(IList<User> users)
         {
             // convert to string
@@ -352,9 +357,11 @@ namespace CodeLandBank.Core.Repositories
             myFile.Close();
 
             File.WriteAllText(_path, userStr);
-            
+
 
         }
+
+
         #endregion
 
     }

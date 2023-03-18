@@ -37,6 +37,7 @@ namespace CodeLandBank.Forms.BankForms
             Application.Restart();
         }
 
+        // We Should redeign edit and profile
         private void seeYourProfileBtn_Click(object sender, EventArgs e)
         {
             UserProfileFm userProfile = new UserProfileFm( _bank , _engin );
@@ -52,6 +53,11 @@ namespace CodeLandBank.Forms.BankForms
             Thread.Sleep(500);
 
             Application.Exit();
+        }
+
+        private void SendMoneyBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

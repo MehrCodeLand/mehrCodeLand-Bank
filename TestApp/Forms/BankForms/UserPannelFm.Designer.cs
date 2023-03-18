@@ -83,6 +83,7 @@
             this.SendMoneyBtn.TabIndex = 4;
             this.SendMoneyBtn.Text = "Send Money";
             this.SendMoneyBtn.UseVisualStyleBackColor = false;
+            this.SendMoneyBtn.Click += new System.EventHandler(this.SendMoneyBtn_Click);
             // 
             // YourBonkAccountBtn
             // 
