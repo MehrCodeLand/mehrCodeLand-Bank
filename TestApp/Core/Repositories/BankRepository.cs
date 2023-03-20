@@ -45,7 +45,6 @@ namespace CodeLandBank.Core.Repositories
 
             return result;
         }
-
         private IList<User> CreateUsers()
         {
             IList<User> users = new List<User>();
@@ -312,35 +311,47 @@ namespace CodeLandBank.Core.Repositories
 
         #endregion
 
-
         #region Edit User
 
         public int EditUser(UserEditVm userEdit)
         {
             IList<User> users = ConvertToUsers();
+            IList<User> forDeleteUser = new List<User>();
 
+
+            // old User
             User myEditUser = users.SingleOrDefault(u => u.CardNumber == userEdit.CardNumber);
-            User forDelete = myEditUser;
+
+            // for delete 
+            forDeleteUser.Add(myEditUser);
 
             //1-update data
             myEditUser.Usrename = userEdit.NewUsername;
-            myEditUser.Password = userEdit.NewPassword;
+            if (userEdit.NewPassword != null)
+            {
+                myEditUser.Password = userEdit.NewPassword;
+            }
 
-
-            //2-remove old data
-            users = RemoveUser(forDelete);
+            // DleteUser --> new users list and without old one
+            // then we update our users
+            users = RemoveUser(forDeleteUser);
+            users.Add(myEditUser);
 
             //3 save new data 
             SaveNewUsers(users);
 
 
-            return 0;
+            return 20065;
         }
 
-        private IList<User> RemoveUser(User user)
+        private IList<User> RemoveUser(IList<User> deleteUsers )
         {
             IList<User> users = ConvertToUsers();
-            users.Remove(user);
+            foreach(var user in deleteUsers)
+            {
+                users.Remove(users.SingleOrDefault(u => u.CardNumber == user.CardNumber));
+            }
+
             return users;
         }
         private void SaveNewUsers(IList<User> users)
@@ -425,7 +436,6 @@ namespace CodeLandBank.Core.Repositories
             return 2234;
         }
         #endregion
-
 
         #region Save User Section
         private IList<User> DeleteUsers(IList<User> deleteUsers)

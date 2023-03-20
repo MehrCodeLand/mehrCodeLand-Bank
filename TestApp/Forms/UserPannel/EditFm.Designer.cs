@@ -41,6 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.RepasswordBox = new System.Windows.Forms.TextBox();
+            this.passwordCheackB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // EditBtn
@@ -115,7 +116,6 @@
             this.usernameData.Location = new System.Drawing.Point(341, 159);
             this.usernameData.Margin = new System.Windows.Forms.Padding(4);
             this.usernameData.Name = "usernameData";
-            this.usernameData.ReadOnly = true;
             this.usernameData.Size = new System.Drawing.Size(261, 20);
             this.usernameData.TabIndex = 46;
             // 
@@ -147,7 +147,6 @@
             this.PasswordBox.Location = new System.Drawing.Point(341, 189);
             this.PasswordBox.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordBox.Name = "PasswordBox";
-            this.PasswordBox.ReadOnly = true;
             this.PasswordBox.Size = new System.Drawing.Size(261, 20);
             this.PasswordBox.TabIndex = 58;
             // 
@@ -179,9 +178,18 @@
             this.RepasswordBox.Location = new System.Drawing.Point(341, 221);
             this.RepasswordBox.Margin = new System.Windows.Forms.Padding(4);
             this.RepasswordBox.Name = "RepasswordBox";
-            this.RepasswordBox.ReadOnly = true;
             this.RepasswordBox.Size = new System.Drawing.Size(261, 20);
             this.RepasswordBox.TabIndex = 61;
+            // 
+            // passwordCheackB
+            // 
+            this.passwordCheackB.AutoSize = true;
+            this.passwordCheackB.Location = new System.Drawing.Point(140, 188);
+            this.passwordCheackB.Name = "passwordCheackB";
+            this.passwordCheackB.Size = new System.Drawing.Size(83, 24);
+            this.passwordCheackB.TabIndex = 64;
+            this.passwordCheackB.Text = "Pasword";
+            this.passwordCheackB.UseVisualStyleBackColor = true;
             // 
             // EditFm
             // 
@@ -190,6 +198,7 @@
             this.BackgroundImage = global::CodeLandBank.Properties.Resources.DSC_0175;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(788, 536);
+            this.Controls.Add(this.passwordCheackB);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.RepasswordBox);
@@ -227,5 +236,6 @@
         private Label label4;
         private Label label6;
         private TextBox RepasswordBox;
+        private CheckBox passwordCheackB;
     }
 }

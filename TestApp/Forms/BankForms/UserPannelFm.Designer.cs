@@ -32,8 +32,6 @@
             this.labelUsername = new System.Windows.Forms.Label();
             this.seeYourProfileBtn = new System.Windows.Forms.Button();
             this.SendMoneyBtn = new System.Windows.Forms.Button();
-            this.YourBonkAccountBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.cardNumberbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -62,7 +60,7 @@
             this.seeYourProfileBtn.BackColor = System.Drawing.Color.Tomato;
             this.seeYourProfileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.seeYourProfileBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.seeYourProfileBtn.Location = new System.Drawing.Point(257, 74);
+            this.seeYourProfileBtn.Location = new System.Drawing.Point(255, 128);
             this.seeYourProfileBtn.Margin = new System.Windows.Forms.Padding(2);
             this.seeYourProfileBtn.Name = "seeYourProfileBtn";
             this.seeYourProfileBtn.Size = new System.Drawing.Size(136, 28);
@@ -76,7 +74,7 @@
             this.SendMoneyBtn.BackColor = System.Drawing.Color.Tomato;
             this.SendMoneyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.SendMoneyBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.SendMoneyBtn.Location = new System.Drawing.Point(257, 106);
+            this.SendMoneyBtn.Location = new System.Drawing.Point(255, 160);
             this.SendMoneyBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SendMoneyBtn.Name = "SendMoneyBtn";
             this.SendMoneyBtn.Size = new System.Drawing.Size(136, 28);
@@ -84,33 +82,6 @@
             this.SendMoneyBtn.Text = "Send Money";
             this.SendMoneyBtn.UseVisualStyleBackColor = false;
             this.SendMoneyBtn.Click += new System.EventHandler(this.SendMoneyBtn_Click);
-            // 
-            // YourBonkAccountBtn
-            // 
-            this.YourBonkAccountBtn.BackColor = System.Drawing.Color.Tomato;
-            this.YourBonkAccountBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.YourBonkAccountBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.YourBonkAccountBtn.Location = new System.Drawing.Point(257, 138);
-            this.YourBonkAccountBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.YourBonkAccountBtn.Name = "YourBonkAccountBtn";
-            this.YourBonkAccountBtn.Size = new System.Drawing.Size(136, 28);
-            this.YourBonkAccountBtn.TabIndex = 5;
-            this.YourBonkAccountBtn.Text = "Your Bank Account";
-            this.YourBonkAccountBtn.UseVisualStyleBackColor = false;
-            this.YourBonkAccountBtn.Click += new System.EventHandler(this.YourBonkAccountBtn_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Tomato;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(257, 170);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 28);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Your Bank Account";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
@@ -146,8 +117,6 @@
             this.ClientSize = new System.Drawing.Size(635, 332);
             this.Controls.Add(this.cardNumberbox);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.YourBonkAccountBtn);
             this.Controls.Add(this.SendMoneyBtn);
             this.Controls.Add(this.seeYourProfileBtn);
             this.Controls.Add(this.labelUsername);
@@ -165,8 +134,6 @@
         private Label labelUsername;
         private Button seeYourProfileBtn;
         private Button SendMoneyBtn;
-        private Button YourBonkAccountBtn;
-        private Button button1;
         private Button button2;
         private TextBox cardNumberbox;
     }

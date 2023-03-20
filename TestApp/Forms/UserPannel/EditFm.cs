@@ -25,6 +25,7 @@ namespace CodeLandBank.Forms.UserPannel
         {
             _bank = bank;
             _engin = engin;
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             FillData();
 
@@ -36,11 +37,64 @@ namespace CodeLandBank.Forms.UserPannel
         }
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            var message = "";
-            int result = ValidationData(usernameData.Text, PasswordBox.Text, RepasswordBox.Text);
+            if (!passwordCheackB.Checked)
+            {
+                // user dont want to change password.
+                int result = ValidationData(usernameData.Text);
+                if(result != 12021)
+                {
+                    ShowResult(result);
+                }
+                else
+                {
+                    // ready to update user
+                    UserEditVm userEdit = new UserEditVm()
+                    {
+                        NewUsername = usernameData.Text.ToLower(),
+                        CardNumber = _engin.CardNumber,
+                    };
+                    result = _bank.EditUser(userEdit);
+                    if (result == 20065)
+                    {
+                        Application.Restart();
+                    }
+                }
+            }
+            else
+            {
+                int result = ValidationData(usernameData.Text, PasswordBox.Text, RepasswordBox.Text);
+                if(result != 12021)
+                {
+                    ShowResult(result);
+                }
+                else
+                {
+                    // ready to update data 
+                    UserEditVm userEdit = new UserEditVm()
+                    {
+                        NewUsername = usernameData.Text.ToLower(),
+                        NewPassword = HashPasswordC.EncodePasswordMd5(PasswordBox.Text),
+                        CardNumber = _engin.CardNumber,
+                    };
+                    result =  _bank.EditUser(userEdit);
+                    if(result == 20065)
+                    {
+                        Application.Restart();
+                    }
+                }
+            }
 
+        }
+
+        // 890 -> username is null or small
+        // 990 -> password is null or small
+        // 550 -> repaswword and password is not same 
+        // 12021 -> OK
+        private void ShowResult(int result)
+        {
+            var message = "";
             // our respound to wrong data
-            if(result == 890)
+            if (result == 890)
             {
                 message = "username is to small!";
                 MessageBox.Show(message);
@@ -49,7 +103,8 @@ namespace CodeLandBank.Forms.UserPannel
                 editFm.Show();
                 Thread.Sleep(300);
                 this.Close();
-            }else if(result == 990)
+            }
+            else if (result == 990)
             {
                 message = "password is to small!";
                 MessageBox.Show(message);
@@ -58,7 +113,8 @@ namespace CodeLandBank.Forms.UserPannel
                 editFm.Show();
                 Thread.Sleep(300);
                 this.Close();
-            }else if(result ==  550)
+            }
+            else if (result == 550)
             {
                 message = "Password and RePassword is not same!";
                 MessageBox.Show(message);
@@ -67,7 +123,8 @@ namespace CodeLandBank.Forms.UserPannel
                 editFm.Show();
                 Thread.Sleep(300);
                 this.Close();
-            }else if(result == -11)
+            }
+            else if (result == -11)
             {
                 message = "Usernaem is exist!";
                 MessageBox.Show(message);
@@ -76,32 +133,27 @@ namespace CodeLandBank.Forms.UserPannel
                 editFm.Show();
                 Thread.Sleep(300);
                 this.Close();
-            }else if( result == 12021)
+            }
+            else if (result == 12021)
             {
                 WeHaveSomeProblemFm weHave = new WeHaveSomeProblemFm();
                 weHave.Show();
                 Thread.Sleep(120);
                 this.Close();
             }
-
-
-            // ready to update data 
-            UserEditVm userEdit = new UserEditVm()
-            {
-                NewUsername = usernameData.Text,
-                NewPassword = HashPasswordC.EncodePasswordMd5(PasswordBox.Text),
-                CardNumber = _engin.CardNumber,
-            };
-            
-
         }
+        private int ValidationData(string newUsername)
+        {
+            if (newUsername == null || newUsername.Length < 2 || newUsername.Length > 12) { return 890; }
+            // is username exist ?? 
+            int result = _bank.IsUsernameExist(newUsername);
+            if (result == -111) { return -111; }
 
-        // 890 -> username is null or small
-        // 990 -> password is null or small
-        // 550 -> repaswword and password is not same 
+            return 12021;
+        }
         private int ValidationData( string newUsername , string newPassword , string Repassword)
         {
-            if(newUsername == null || newUsername.Length < 2) { return 890;  }
+            if(newUsername == null || newUsername.Length < 2 || newUsername.Length > 12 ) { return 890;  }
             else if(newPassword == null || newPassword.Length < 4) { return 990; }
             else if(Repassword != newPassword) { return 550; }
 
